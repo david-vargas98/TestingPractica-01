@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Project;
+use App\Http\Controllers\ProjectsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,19 +19,7 @@ Route::get('/', function () {
 });
 
 //Route for the get request on the ProjectsTest.php file
-Route::get('/projects', function(){
-    //We want to fetch all of the projects
-    $projects = Project::all();
-
-    return view('projects.index', compact('projects'));
-});
+Route::get('/projects', [ProjectsController::class, 'index']);
 
 //Route for the post request on the ProjectsTest.php file
-Route::post('projects', function () {
-    //Validation
-
-    //Perpetuation
-    Project::create(request(['title', 'description']));
-    //Redirection
-
-});
+Route::post('projects', [ProjectsController::class, 'store']);
