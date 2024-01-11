@@ -21,5 +21,6 @@ class ProjectsController extends Controller
         //Perpetuation
         Project::create(request(['title', 'description']));
         //Redirection
+        return redirect('/projects');
     }
 }
