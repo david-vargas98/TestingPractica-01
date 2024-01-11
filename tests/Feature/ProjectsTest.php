@@ -23,8 +23,8 @@ class ProjectsTest extends TestCase
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph
         ];
-        //By making a post request, a project will be created
-        $this->post('/projects', $attributes); //Post request
+        //By making a post request, a project will be created - Post request
+        $this->post('/projects', $attributes)->assertRedirect('/projects');
 
         //This makes it to be seen on the database table
 
