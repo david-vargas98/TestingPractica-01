@@ -14,20 +14,24 @@ class ProjectsTest extends TestCase
      * A basic feature test example.
      * @return void
      */
-    /** @test */ 
+    /** @test */
     public function a_user_can_create_a_project(): void
     {
-        //An arrray of attributes using faker
+        $this->withoutExceptionHandling();
+        //An arrray of attributes using faker to fill the record on the table
         $attributes = [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph
         ];
         //By making a post request, a project will be created
-        $this->post('/projects', $attributes);
+        $this->post('/projects', $attributes); //Post request
 
         //This makes it to be seen on the database table
 
         //After I make the request, i'm going to assert that the database has a projects table that include the previous attributes
-        $this->assertDatabaseHas('projects', $attributes);
+        $this->assertDatabaseHas('projects', $attributes); //Insertion in table
+
+        //Post request that enables us to see our previous post request
+        $this->get('/projects')->assertSee($attributes['title']);
     }
 }
