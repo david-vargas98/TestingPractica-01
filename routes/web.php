@@ -21,5 +21,8 @@ Route::get('/', function () {
 //Route for the get request on the ProjectsTest.php file
 Route::get('/projects', [ProjectsController::class, 'index']);
 
+//Route for the get request on the ProjectsTest.php file
+Route::get('/projects/{project}', [ProjectsController::class, 'show']);
+
 //Route for the post request on the ProjectsTest.php file
 Route::post('projects', [ProjectsController::class, 'store']);
