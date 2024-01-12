@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -33,5 +34,31 @@ class ProjectsTest extends TestCase
 
         //Post request that enables us to see our previous post request
         $this->get('/projects')->assertSee($attributes['title']);
+    }
+
+    /**
+     * A new test.
+     * @return void
+     */
+    /** @test */
+    public function a_project_requires_a_title(): void
+    {
+        //An arrray of attributes using faker to fill the record on the table
+        $attributes = Project::factory()->raw(['title' => '']);
+        //if I do a request to that endpoint, but I don't give it a title, it should throw an error
+        $this->post('/projects', $attributes)->assertSessionHasErrors('title');
+
+    }
+    /**
+     * A new test.
+     * @return void
+     */
+    /** @test */
+    public function a_project_requires_a_description(): void
+    {
+        //An arrray of attributes using faker to fill the record on the table
+        $attributes = Project::factory()->raw(['description' => '']);
+        //if I do a request to that endpoint, but I don't give it a title, it should throw an error
+        $this->post('/projects', $attributes)->assertSessionHasErrors('description');
     }
 }
