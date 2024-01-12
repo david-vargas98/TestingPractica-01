@@ -61,4 +61,20 @@ class ProjectsTest extends TestCase
         //if I do a request to that endpoint, but I don't give it a title, it should throw an error
         $this->post('/projects', $attributes)->assertSessionHasErrors('description');
     }
+
+    /**
+     * A new test.
+     * @return void
+     */
+    /** @test */
+    public function a_user_can_view_a_project(): void
+    {
+        $this->withoutExceptionHandling();
+        //This is useful because we need to make fake data in the attributes array
+        $project = Project::factory()->create();
+        //This is useful because after the test this ensures we reset everything back to the initial state
+        $this->get('/projects/' . $project->id)
+            ->assertSee($project->title)
+            ->assertSee($project->description);
+    }
 }
