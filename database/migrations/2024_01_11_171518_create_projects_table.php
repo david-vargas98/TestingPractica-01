@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('owner_id');
             $table->string('title');
             $table->string('description');
             $table->timestamps();
+            //This is a foreign key that references the id on the users table
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
