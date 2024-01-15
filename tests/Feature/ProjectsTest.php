@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -33,6 +34,10 @@ class ProjectsTest extends TestCase
     public function a_user_can_create_a_project(): void
     {
         $this->withoutExceptionHandling();
+
+        //Create a brand new user instead of the authenticated user
+        $this->actingAs(User::factory()->create());
+
         //An arrray of attributes using faker to fill the record on the table
         $attributes = [
             'title' => $this->faker->sentence,
@@ -57,6 +62,8 @@ class ProjectsTest extends TestCase
     /** @test */
     public function a_project_requires_a_title(): void
     {
+        //Create a brand new user instead of the authenticated user
+        $this->actingAs(User::factory()->create());
         //An arrray of attributes using faker to fill the record on the table
         $attributes = Project::factory()->raw(['title' => '']);
         //if I do a request to that endpoint, but I don't give it a title, it should throw an error
@@ -70,6 +77,8 @@ class ProjectsTest extends TestCase
     /** @test */
     public function a_project_requires_a_description(): void
     {
+        //Create a brand new user instead of the authenticated user
+        $this->actingAs(User::factory()->create());
         //An arrray of attributes using faker to fill the record on the table
         $attributes = Project::factory()->raw(['description' => '']);
         //if I do a request to that endpoint, but I don't give it a title, it should throw an error
