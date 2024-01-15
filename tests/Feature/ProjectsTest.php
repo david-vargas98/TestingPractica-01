@@ -73,7 +73,7 @@ class ProjectsTest extends TestCase
         //This is useful because we need to make fake data in the attributes array
         $project = Project::factory()->create();
         //This is useful because after the test this ensures we reset everything back to the initial state
-        $this->get('/projects/' . $project->id)
+        $this->get($project->path())
             ->assertSee($project->title)
             ->assertSee($project->description);
     }
