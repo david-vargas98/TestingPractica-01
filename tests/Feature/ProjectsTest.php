@@ -11,6 +11,20 @@ class ProjectsTest extends TestCase
 {
     use WithFaker; //This is useful because we need to make fake data in the attributes array
     use RefreshDatabase; //This is useful because after the test this ensures we reset everything back to the initial state
+
+    /**
+     * A new test.
+     * @return void
+     */
+    /** @test */
+    public function only_authenticated_users_can_create_projects(): void
+    {
+        //An arrray of attributes using faker to fill the record on the table
+        $attributes = Project::factory()->raw();
+        //if I do a request to that endpoint, but I don't give it a title, it should throw an error
+        $this->post('/projects', $attributes)->assertRedirect('login');
+    }
+
     /**
      * A basic feature test example.
      * @return void
