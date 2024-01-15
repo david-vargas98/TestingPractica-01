@@ -24,6 +24,8 @@ class ProjectsController extends Controller
     {
         //Validation
         $attributes = request()->validate(['title' => 'required', 'description' => 'required']);
+        //This set the owner_id to the authenticated user
+        $attributes['owner_id'] = auth()->id();
         //Perpetuation
         Project::create($attributes);
         //Redirection
