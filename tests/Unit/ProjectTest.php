@@ -4,8 +4,8 @@ namespace Tests\Unit;
 
 use App\Models\Project;
 use Faker\Factory;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase; 
+use Tests\TestCase; //This is useful because we need to make fake data in the attributes array
 
 class ProjectTest extends TestCase
 {
