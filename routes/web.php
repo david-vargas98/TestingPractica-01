@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectsController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +27,8 @@ Route::get('/projects', [ProjectsController::class, 'index']);
 Route::get('/projects/{project}', [ProjectsController::class, 'show']);
 
 //Route for the post request on the ProjectsTest.php file
-Route::post('projects', [ProjectsController::class, 'store']);
+Route::post('projects', [ProjectsController::class, 'store'])->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
